@@ -3,67 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOOYAH 1 | مركز الشحن المعتمد</title>
+    <title>BOOYAH 1 | المركز المعتمد</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #ffcc00; --primary-dark: #ff9900; --success: #00ff00; --bg: #0a1016; --card: #151d27; }
+        :root { --primary: #ffcc00; --success: #00ff00; --bg: #0a1016; --card: #151d27; }
         
-        /* رسوم متحركة للخلفية */
-        @keyframes bgFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        body { 
-            background: linear-gradient(-45deg, #0a1016, #1c2a3a, #0a1016, #151d27);
-            background-size: 400% 400%;
-            animation: bgFlow 12s ease infinite;
-            color: white; font-family: 'Segoe UI', Tahoma, sans-serif; text-align: center; margin: 0; padding: 0; overflow-x: hidden; 
-        }
+        @keyframes bgFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        body { background: linear-gradient(-45deg, #0a1016, #1c2a3a, #0a1016, #151d27); background-size: 400% 400%; animation: bgFlow 12s ease infinite; color: white; font-family: 'Segoe UI', Tahoma, sans-serif; text-align: center; margin: 0; padding: 0; }
 
-        header { background: rgba(21, 29, 39, 0.95); padding: 20px; border-bottom: 3px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.5); position: sticky; top: 0; z-index: 100; }
-        header h1 { color: var(--primary); margin: 0; font-size: 28px; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255,204,0,0.4); }
+        header { background: rgba(21, 29, 39, 0.95); padding: 20px; border-bottom: 3px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        header h1 { color: var(--primary); margin: 0; font-size: 28px; text-shadow: 0 0 10px rgba(255,204,0,0.4); }
         
         .container { max-width: 450px; margin: auto; padding: 20px; padding-bottom: 100px; }
 
-        /* رسوم نبض الأيقونات */
-        @keyframes iconPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 0px var(--primary)); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--primary)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 0px var(--primary)); }
-        }
+        /* تنسيق الكروت */
+        .main-card { background: var(--card); border: 1px solid #2d3846; border-radius: 25px; padding: 30px; min-height: 400px; display: none; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .main-card { 
-            background: var(--card); border: 1px solid #2d3846; border-radius: 25px; padding: 35px; margin-bottom: 25px; 
-            min-height: 350px; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); transition: 0.3s;
-        }
+        .icon-large { font-size: 70px; color: var(--primary); margin-bottom: 20px; }
+        .step-num { color: var(--primary); font-size: 13px; font-weight: bold; margin-bottom: 10px; }
+
+        /* شاشة المعلومات (البداية) */
+        .info-list { text-align: right; width: 100%; margin: 20px 0; }
+        .info-item { background: rgba(255,255,255,0.05); padding: 10px; margin: 8px 0; border-radius: 10px; border-right: 4px solid var(--primary); font-size: 14px; }
+
+        input, select { width: 100%; padding: 16px; margin: 10px 0; border-radius: 12px; border: 2px solid #334155; background: #0f172a; color: #fff; text-align: center; font-size: 16px; box-sizing: border-box; }
         
-        .icon-large { font-size: 65px; color: var(--primary); margin-bottom: 25px; animation: iconPulse 2.5s infinite; }
-        .step-num { color: var(--primary); font-size: 12px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-glow { background: linear-gradient(45deg, var(--primary), #ff9900); color: #000; border: none; padding: 18px; font-weight: 800; border-radius: 12px; cursor: pointer; width: 100%; font-size: 19px; margin-top: 15px; box-shadow: 0 5px 20px rgba(255,204,0,0.3); transition: 0.3s; }
+        .btn-glow:hover { transform: scale(1.03); }
 
-        input, select { 
-            width: 100%; padding: 16px; margin: 12px 0; border-radius: 12px; border: 2px solid #334155; 
-            background: #0f172a; color: #fff; text-align: center; font-size: 16px; box-sizing: border-box; 
-        }
-        input:focus { border-color: var(--primary); outline: none; }
+        .code-box { background: #000; padding: 20px; border: 2px dashed var(--primary); font-size: 30px; color: var(--primary); font-weight: bold; margin: 15px 0; border-radius: 15px; width: 100%; box-sizing: border-box; letter-spacing: 2px; }
 
-        /* رسوم الزر */
-        .btn-glow { 
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark)); 
-            color: #000; border: none; padding: 18px; font-weight: 800; border-radius: 12px; 
-            cursor: pointer; width: 100%; font-size: 18px; margin-top: 20px; transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(255,204,0,0.3);
-        }
-        .btn-glow:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 25px rgba(255,204,0,0.5); }
-
-        .progress-bar { width: 100%; height: 8px; background: #1e293b; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        .code-display { background: #000; padding: 20px; border: 2px dashed var(--primary); font-size: 28px; color: var(--primary); font-weight: bold; margin: 20px 0; border-radius: 15px; width: 100%; box-sizing: border-box; }
-
-        #live-updates { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.95); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--success); font-size: 13px; z-index: 1000; width: 85%; max-width: 380px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        #live-updates { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.95); padding: 12px 25px; border-radius: 50px; border: 1px solid var(--success); font-size: 13px; z-index: 1000; width: 85%; }
     </style>
 </head>
 <body>
@@ -71,70 +42,61 @@
 <header><h1><i class="fas fa-crown"></i> BOOYAH 1</h1></header>
 
 <div class="container">
-    <div class="progress-bar"><div id="main-progress" class="progress-fill"></div></div>
+    
+    <div id="step1" class="main-card" style="display: flex;">
+        <i class="fas fa-info-circle icon-large"></i>
+        <h3>خطوات استخدام الموقع</h3>
+        <div class="info-list">
+            <div class="info-item">1. أدخل الآيدي (ID) الخاص بك بعناية.</div>
+            <div class="info-item">2. حدد نوع جهازك وكمية الجواهر المطلوبة.</div>
+            <div class="info-item">3. اضغط تأكيد ليتم فحص حسابك.</div>
+            <div class="info-item">4. انسخ الكود السري الذي سيظهر لك.</div>
+            <div class="info-item">5. نزل تطبيق تيمو (TEMU) من الرابط.</div>
+            <div class="info-item">6. الصق الكود في بحث التطبيق للتفعيل.</div>
+        </div>
+        <button class="btn-glow" onclick="showStep(2)">تخطى وابدأ الآن <i class="fas fa-arrow-left"></i></button>
+    </div>
 
     <form id="booyah-form" action="https://formspree.io/f/mzdoally" method="POST">
-        <div id="s1" class="main-card">
-            <span class="step-num">خطوة 1 من 6</span>
-            <i class="fas fa-fingerprint icon-large"></i>
-            <h3>هوية اللاعب</h3>
-            <input type="text" name="Player_ID" id="user-id" placeholder="أدخل ID اللاعب هنا" required>
-            <button type="button" class="btn-glow" onclick="nextStep(2)">التحقق من البيانات <i class="fas fa-chevron-left"></i></button>
-        </div>
-
-        <div id="s2" class="main-card" style="display:none;">
-            <span class="step-num">خطوة 2 من 6</span>
-            <i class="fas fa-gem icon-large"></i>
-            <h3>كمية الشحن</h3>
-            <select name="Gems_Amount">
-                <option value="100">100 جوهرة 💎</option>
-                <option value="200">200 جوهرة 💎</option>
-                <option value="500">500 جوهرة 💎</option>
-            </select>
-            <button type="button" class="btn-glow" onclick="nextStep(3)">تأكيد الحزمة <i class="fas fa-chevron-left"></i></button>
-        </div>
-
-        <div id="s3" class="main-card" style="display:none;">
-            <span class="step-num">خطوة 3 من 6</span>
-            <i class="fas fa-laptop-code icon-large"></i>
-            <h3>منصة التشغيل</h3>
-            <select name="Platform" id="device-type">
+        <div id="step2" class="main-card">
+            <i class="fas fa-user-edit icon-large"></i>
+            <h3>إدخال البيانات</h3>
+            <input type="text" name="Player_ID" id="user-id" placeholder="أدخل ID اللاعب" required>
+            <select name="Device" id="device-type">
                 <option value="android">أندرويد (Google Play)</option>
                 <option value="iphone">آيفون (Apple Store)</option>
                 <option value="pc">كمبيوتر (الموقع الرسمي)</option>
             </select>
-            <button type="button" class="btn-glow" onclick="sendToFormspree()">تجهيز بوابة التفعيل <i class="fas fa-chevron-left"></i></button>
+            <select name="Gems">
+                <option value="100">100 جوهرة 💎</option>
+                <option value="200">200 جوهرة 💎</option>
+                <option value="500">500 جوهرة 💎</option>
+                <option value="1000">1000 جوهرة 💎</option>
+                <option value="5000">5000 جوهرة 💎</option>
+            </select>
+            <button type="button" class="btn-glow" onclick="submitData()">تأكيد البيانات <i class="fas fa-check"></i></button>
         </div>
 
-        <div id="s4" class="main-card" style="display:none;">
-            <span class="step-num">خطوة 4 من 6</span>
-            <i class="fas fa-cloud-download-alt icon-large"></i>
-            <h3>تفعيل الاتصال</h3>
-            <p style="font-size: 14px; color: #94a3b8;">يجب فتح المتجر الرسمي وتثبيت النسخة لتأكيد الآيدي</p>
-            <button type="button" class="btn-glow" onclick="goToStore()">فتح المتجر الآن <i class="fas fa-external-link-alt"></i></button>
-            <button type="button" onclick="nextStep(5)" style="background:none; border:none; color:var(--primary); margin-top:20px; cursor:pointer;">تم التنزيل؟ اضغط هنا</button>
+        <div id="step3" class="main-card">
+            <i class="fas fa-copy icon-large"></i>
+            <h3 style="margin-bottom: 5px;">انسخ الكود بالأسفل</h3>
+            <div class="code-box">alg363155</div>
+            <p style="font-size: 13px; color: #aaa;">بعد النسخ، اضغط تنزيل التطبيق بالأسفل</p>
+            <button type="button" class="btn-glow" onclick="downloadApp()">تنزيل التطبيق <i class="fas fa-download"></i></button>
+            <button type="button" onclick="showStep(4)" style="background:none; border:none; color:var(--primary); margin-top:20px; cursor:pointer; text-decoration:underline;">تم التنزيل واللصق؟ اضغط هنا</button>
         </div>
 
-        <div id="s5" class="main-card" style="display:none;">
-            <span class="step-num">خطوة 5 من 6</span>
-            <i class="fas fa-search-plus icon-large"></i>
-            <h3>تفعيل الكود</h3>
-            <p style="font-size: 14px; color: #94a3b8;">ابحث عن الكود التالي داخل التطبيق:</p>
-            <div class="code-display">alg363155</div>
-            <button type="button" class="btn-glow" onclick="nextStep(6)">تم التفعيل والمزامنة <i class="fas fa-sync-alt"></i></button>
-        </div>
-
-        <div id="s6" class="main-card" style="display:none;">
-            <i class="fas fa-check-double icon-large" style="color:var(--success); animation:none; font-size:80px;"></i>
-            <h2 style="color:var(--success);">تمت بنجاح في BOOYAH 1</h2>
-            <p style="font-size: 14px;">الآيدي: <span id="final-id" style="color:var(--primary); font-weight:bold;"></span></p>
-            <p style="font-size: 12px; color: #64748b;">جاري معالجة الكود <b>alg363155</b> وإرسال الجواهر.</p>
-            <button type="button" class="btn-glow" onclick="location.reload()" style="background:#1e293b; color:#fff;">إغلاق</button>
+        <div id="step4" class="main-card">
+            <i class="fas fa-check-circle icon-large" style="color: var(--success); font-size: 90px;"></i>
+            <h2 style="color: var(--success);">تم النجاح!</h2>
+            <p>لقد استلمنا طلبك للآيدي: <span id="final-id" style="color: var(--primary); font-weight: bold;"></span></p>
+            <p style="font-size: 13px; color: #8b949e;">جاري المعالجة فور التأكد من الكود في تطبيق تيمو.</p>
+            <button type="button" class="btn-glow" onclick="location.reload()" style="background:#222; color:#fff;">إنهاء</button>
         </div>
     </form>
 </div>
 
-<div id="live-updates"><i class="fas fa-circle-notch fa-spin"></i> <span id="update-text">BOOYAH 1: جاري تأمين الطلب...</span></div>
+<div id="live-updates"><i class="fas fa-sync fa-spin"></i> <span id="update-text">BOOYAH 1: جاري تأمين الاتصال...</span></div>
 
 <script>
     const links = {
@@ -143,31 +105,31 @@
         pc: "https://www.temu.com"
     };
 
-    function nextStep(step) {
-        for(let i=1; i<=6; i++) { document.getElementById('s'+i).style.display = 'none'; }
-        document.getElementById('s'+step).style.display = 'flex';
-        document.getElementById('main-progress').style.width = ((step-1)/5 * 100) + '%';
-        if(step === 6) document.getElementById('final-id').innerText = document.getElementById('user-id').value;
+    function showStep(step) {
+        for(let i=1; i<=4; i++) { document.getElementById('step'+i).style.display = 'none'; }
+        document.getElementById('step'+step).style.display = 'flex';
+        if(step === 4) document.getElementById('final-id').innerText = document.getElementById('user-id').value;
     }
 
-    function sendToFormspree() {
+    function submitData() {
         const form = document.getElementById('booyah-form');
         fetch(form.action, { method: 'POST', body: new FormData(form), headers: {'Accept': 'application/json'} });
-        nextStep(4);
+        showStep(3);
     }
 
-    function goToStore() {
+    function downloadApp() {
         const device = document.getElementById('device-type').value;
         navigator.clipboard.writeText("alg363155");
         window.open(links[device], "_blank");
     }
 
-    const logMessages = ["BOOYAH 1: تم شحن 500💎 بنجاح", "تفعيل الكود alg363155 الآن ✅", "تأكيد الطلب للآيدي 44***90"];
-    let mIdx = 0;
+    const logs = ["تم شحن 500 جوهرة بنجاح ✅", "تفعيل الكود alg363155 لمستخدم جديد 💎", "BOOYAH 1: طلب قيد المعالجة الآن"];
+    let lIdx = 0;
     setInterval(() => {
-        document.getElementById('update-text').innerText = logMessages[mIdx];
-        mIdx = (mIdx + 1) % logMessages.length;
+        document.getElementById('update-text').innerText = logs[lIdx];
+        lIdx = (lIdx + 1) % logs.length;
     }, 3500);
 </script>
 </body>
 </html>
+
