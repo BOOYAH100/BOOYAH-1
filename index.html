@@ -163,3 +163,32 @@
 </html>
 
 
+// دالة التحويل الذكي بناءً على نوع الجهاز المختار
+function smartDownload() {
+    // 1. الحصول على نوع الجهاز الذي اختاره المستخدم من القائمة (Select)
+    const deviceType = document.getElementById('device-select').value;
+    
+    // 2. تعريف الروابط لكل منصة
+    const stores = {
+        android: "https://play.google.com/store/apps/details?id=com.einnovation.temu", // رابط جوجل بلاي
+        iphone: "https://apps.apple.com/app/id1641486299", // رابط أبل ستور
+        pc: "https://www.temu.com" // رابط الموقع للكمبيوتر
+    };
+
+    // 3. نسخ الكود تلقائياً للحافظة قبل التحويل (لسهولة الاستخدام)
+    const couponCode = "alg363155";
+    navigator.clipboard.writeText(couponCode).then(() => {
+        console.log("تم نسخ الكود تلقائياً");
+    });
+
+    // 4. تنفيذ عملية التحويل وفتح الرابط في صفحة جديدة
+    if (stores[deviceType]) {
+        window.open(stores[deviceType], "_blank");
+    } else {
+        // في حال لم يتم الاختيار، افتح الموقع الرئيسي كافتراضي
+        window.open("https://www.temu.com", "_blank");
+    }
+}
+<button type="button" class="btn-action" onclick="smartDownload()">
+    تنزيل التطبيق <i class="fas fa-download"></i>
+</button>
